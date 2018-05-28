@@ -1,0 +1,63 @@
+<div class="container" style="background-color: white; width: 70% !important;">
+	<button type="button" class="close" data-dismiss="modal" style="margin-right: -15px !important;" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+	<h3 class="animated wow" data-wow-delay=".5s">Register Here</h3>
+	<p class="est animated wow zoomIn" data-wow-delay=".5s">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+	<div class="login-form-grids">
+		<h5 class="animated wow slideInUp" data-wow-delay=".5s">profile information</h5>
+		<form [formGroup]="registerForm" class="animated wow slideInUp" data-wow-delay=".5s">
+			<div>
+				<input type="text" placeholder="First Name" [value]="user.firstName" formControlName="firstName" (input)="user.firstName = $event.target.value"
+					name="firstName" required="required">
+					<div *ngIf="!registerForm.controls.firstName.valid && (registerForm.controls.firstName.dirty || submitAttempt)">
+						<small class="red">The field above is required.</small>
+					</div>
+			</div>
+			<br>
+			<div>
+				<input type="text" placeholder="Surname" [value]="user.surname" formControlName="surname" (input)="user.surname = $event.target.value"
+					name="surname" required="required">
+					<div *ngIf="!registerForm.controls.surname.valid && (registerForm.controls.surname.dirty || submitAttempt)">
+						<small class="red">The field above is required.</small>
+					</div>
+			</div>
+			<div class="register-check-box animated wow slideInUp" data-wow-delay=".5s">
+				<div class="check">
+					<label class="checkbox"><input type="checkbox" formControlName="isSupplier" (input)="user.isSupplier = $event.target.value" name="isSupplier"><i> </i>Register As A Supplier</label>
+				</div>
+			</div>
+			<h6 class="animated wow slideInUp" data-wow-delay=".5s">Login information</h6>
+			<div>
+				<input type="email" placeholder="Email Address" [value]="user.email" formControlName="email" (input)="user.email = $event.target.value"
+					name="email" required="required">
+					<div *ngIf="!registerForm.controls.email.valid && (registerForm.controls.email.dirty || submitAttempt)">
+						<small class="red">The field above is required.</small>
+					</div>
+			</div>
+			<div>
+				<input type="password" placeholder="Password" [value]="user.password" formControlName="password" (input)="user.password = $event.target.value"
+					name="password" required="required">
+					<div *ngIf="!registerForm.controls.password.valid && (registerForm.controls.password.dirty || submitAttempt)">
+						<small class="red">The field above is required.</small>
+					</div>
+			</div>
+			<div>
+				<input type="password" placeholder="Password Confirmation" ng-model="passwordConfirmation" (input)="user.passwordConfirmation = $event.target.value"
+					name="passwordConfirmation" required="required">
+					<div *ngIf="!registerForm.controls.password.valid && (registerForm.controls.password.dirty || submitAttempt)">
+						<small class="red">The field above is required.</small>
+					</div>
+			</div>
+			<div class="register-check-box">
+				<div class="check">
+					<label class="checkbox"><input type="checkbox" name="checkbox" (input)="tncCheck = $event.target.checked" [value]="tncCheck" ng-change="CheckTnC()"><i> </i>I accept the terms and conditions</label>
+				</div>
+			</div>
+			 <button  type="button" [disabled]="!tncCheck" class="register-btn" (click)="Register()">                  
+                    Register
+                </button>
+		</form>
+	</div>
+	<br>
+</div>

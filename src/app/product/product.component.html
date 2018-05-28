@@ -1,0 +1,529 @@
+<div class="products">
+	<div class="container">
+		<div class="col-md-4 products-left">
+			<div class="filter-price animated wow slideInUp" data-wow-delay=".5s">
+				<h3>Filter By Price</h3>
+				<ul class="dropdown-menu1">
+					<li>
+						<a href="">
+							<div id="slider-range"></div>
+							<input type="text" id="amount" style="border: 0" />
+						</a>
+					</li>
+				</ul>
+				<script type='text/javascript'>
+					//<![CDATA[ 
+					$(window).load(function () {
+						$("#slider-range").slider({
+							range: true,
+							min: 0,
+							max: 100000,
+							values: [20000, 80000],
+							slide: function (event, ui) {
+								$("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+							}
+						});
+						$("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
+
+
+					});//]]>
+				</script>
+				<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+				<!---->
+			</div>
+			<div class="categories animated wow slideInUp" data-wow-delay=".5s">
+				<h3>Categories</h3>
+				<ul class="cate">
+					<li>Special Deals <span>(15)</span></li>
+					<li data-toggle="collapse" class="productText" data-target="#collapseElectronicsAndComputers">Electronics & Computers <span>(16)</span></li>
+					<ul class="collapse" id="collapseElectronicsAndComputers">
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'TV & Video')">TV & Video</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Home Audio & Theater')">Home Audio & Theater</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Camera, Photo & Video')">Camera, Photo & Video</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Cell Phones & Accessories')">Cell Phones & Accessories</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Headphones')">Headphones</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Video Games')">Video Games</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Bluetooth & Wireless Speakers')">Bluetooth & Wireless Speakers</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Car Electronics')">Car Electronics</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Musical Instruments')">Musical Instruments</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Wearable Technology')">Wearable Technology</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Electronics Showcase')">Electronics Showcase</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Computers, Tablets, & PC Products')">Computers, Tablets, & PC Products</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Monitors')">Monitors</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Accessories')">Accessories</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Networking')">Networking</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Drives & Storage')">Drives & Storage</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Computer Parts & Components')">Computer Parts & Components</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Software')">Software</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Printers & Ink')">Printers & Ink</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Office & School Supplies')">Office & School Supplies</li>
+						<li class="productText" (click)="Navigate('Electronics, Computers & Office', 'Trade In Your Electronics')">Trade In Your Electronics</li>
+					</ul>
+					<li data-toggle="collapse" class="productText" data-target="#collapseToysKidsAndBaby">Toys, Kids & Baby<span>(15)</span></li>
+					<ul class="collapse" id="collapseToysKidsAndBaby">
+						<li class="productText" (click)="Navigate('Toys, Kids & Baby', 'Toys & Games')">Toys & Games</li>
+						<li class="productText" (click)="Navigate('Toys, Kids & Baby', 'Baby')">Baby</li>
+						<li class="productText" (click)="Navigate('Toys, Kids & Baby', 'Video Games for Kids')">Video Games for Kids</li>
+						<li class="productText" (click)="Navigate('Toys, Kids & Baby', 'Kids Birthdays')">Kids Birthdays</li>
+						<li class="productText" (click)="Navigate('Toys, Kids & Baby', 'For Girls')">For Girls</li>
+						<li class="productText" (click)="Navigate('Toys, Kids & Baby', 'For Boys')">For Boys</li>
+						<li class="productText" (click)="Navigate('Toys, Kids & Baby', 'For Baby')">For Baby</li>
+					</ul>
+					<li data-toggle="collapse" class="productText" data-target="#collapsePetSupplies">Pet Supplies<span>(15)</span></li>
+					<ul class="collapse" id="collapsePetSupplies">
+						<li class="productText" (click)="Navigate('Pet Supplies', 'Pet Profile')">Pet Profile</li>
+						<li class="productText" (click)="Navigate('Pet Supplies', 'Dog Supplies')">Dog Supplies</li>
+						<li class="productText" (click)="Navigate('Pet Supplies', 'Dog Food')">Dog Food</li>
+						<li class="productText" (click)="Navigate('Pet Supplies', 'Cat Supplies')">Cat Supplies</li>
+						<li class="productText" (click)="Navigate('Pet Supplies', 'Cat Food')">Cat Food</li>
+						<li class="productText" (click)="Navigate('Pet Supplies', 'Fish & Aquatic Pets')">Fish & Aquatic Pets</li>
+						<li class="productText" (click)="Navigate('Pet Supplies', 'Small Animals')">Small Animals</li>
+						<li class="productText" (click)="Navigate('Pet Supplies', 'Birds')">Birds</li>
+					</ul>
+					<li data-toggle="collapse" class="productText" data-target="#collapseClothingShoesAndJewelry">Clothing, Shoes & Jewelry<span>(15)</span></li>
+					<ul class="collapse" id="collapseClothingShoesAndJewelry">
+						<li class="productText" (click)="Navigate('Clothing, Shoes & Jewelry', 'Women')">Women</li>
+						<li class="productText" (click)="Navigate('Clothing, Shoes & Jewelry', 'Men')">Men</li>
+						<li class="productText" (click)="Navigate('Clothing, Shoes & Jewelry', 'Girls')">Girls</li>
+						<li class="productText" (click)="Navigate('Clothing, Shoes & Jewelry', 'Boys')">Boys</li>
+						<li class="productText" (click)="Navigate('Clothing, Shoes & Jewelry', 'Baby')">Baby</li>
+						<li class="productText" (click)="Navigate('Clothing, Shoes & Jewelry', 'Luggage')">Luggage</li>
+						<li class="productText" (click)="Navigate('Clothing, Shoes & Jewelry', 'Prime Wardrobe')">Prime Wardrobe</li>
+					</ul>
+					<li data-toggle="collapse" class="productText" data-target="#collapseAutomotiveAndIndustrial">Automotive & Industrial<span>(15)</span></li>
+					<ul class="collapse" id="collapseAutomotiveAndIndustrial">
+						<li class="productText" (click)="Navigate('Automotive & Industrial', 'Automotive Parts & Accessories')">Automotive Parts & Accessories</li>
+						<li class="productText" (click)="Navigate('Automotive & Industrial', 'Automotive Tools & Equipment')">Automotive Tools & Equipment</li>
+						<li class="productText" (click)="Navigate('Automotive & Industrial', 'Car/Vehicle Electronics & GPS')">Car/Vehicle Electronics & GPS</li>
+						<li class="productText" (click)="Navigate('Automotive & Industrial', 'Tires & Wheels')">Tires & Wheels</li>
+						<li class="productText" (click)="Navigate('Automotive & Industrial', 'Motorcycle & Powersports')">Motorcycle & Powersports</li>
+						<li class="productText" (click)="Navigate('Automotive & Industrial', 'Vehicles')">Vehicles</li>
+						<li class="productText" (click)="Navigate('Automotive & Industrial', 'Your Garage')">Your Garage</li>
+						<li class="productText" (click)="Navigate('Automotive & Industrial', 'Industrial Supplies')">Industrial Supplies</li>
+						<li class="productText" (click)="Navigate('Automotive & Industrial', 'Lab & Scientific')">Lab & Scientific</li>
+						<li class="productText" (click)="Navigate('Automotive & Industrial', 'Janitorial')">Janitorial</li>
+						<li class="productText" (click)="Navigate('Automotive & Industrial', 'Safety')">Safety</li>
+						<li class="productText" (click)="Navigate('Automotive & Industrial', 'Food Service')">Food Service</li>
+						<li class="productText" (click)="Navigate('Automotive & Industrial', 'Material Handling')">Material Handling</li>
+					</ul>
+					<li data-toggle="collapse" class="productText" data-target="#collapseHomeGardenAndTools">Home, Garden & Tools<span>(15)</span></li>
+					<ul class="collapse" id="collapseHomeGardenAndTools">
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Kitchen & Dining')">Kitchen & Dining</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Furniture')">Furniture</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Bed & Bath')">Bed & Bath</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Appliances')">Appliances</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Garden & Outdoor')">Garden & Outdoor</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Fine Art')">Fine Art</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Arts, Crafts & Sewing')">Arts, Crafts & Sewing</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Pet Supplies')">Pet Supplies</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Wedding Registry')">Wedding Registry</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Event & Party Supplies')">Event & Party Supplies</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Home Improvement')">Home Improvement</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Power & Hand Tools')">Power & Hand Tools</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Lamps & Light Fixtures')">Lamps & Light Fixtures</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Kitchen & Bath Fixtures')">Kitchen & Bath Fixtures</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Hardware')">Hardware</li>
+						<li class="productText" (click)="Navigate('Home, Garden & Tools', 'Smart Home')">Smart Home</li>
+					</ul>
+					<li data-toggle="collapse" class="productText" data-target="#collapseBeautyHealth">Beauty & Health<span>(15)</span></li>
+					<ul class="collapse" id="collapseBeautyHealth">
+						<li class="productText" (click)="Navigate('Beauty & Health', 'All Beauty')"> All Beauty</li>
+						<li class="productText" (click)="Navigate('Beauty & Health', 'Luxury Beauty')">Luxury Beauty</li>
+						<li class="productText" (click)="Navigate('Beauty & Health', 'Professional Skin Care')">Professional Skin Care</li>
+						<li class="productText" (click)="Navigate('Beauty & Health', 'Salon & Spa')">Salon & Spa</li>
+						<li class="productText" (click)="Navigate('Beauty & Health', 'Men’s Grooming')">Men’s Grooming</li>
+						<li class="productText" (click)="Navigate('Beauty & Health', 'Health, Household & Baby Care')">Health, Household & Baby Care</li>
+						<li class="productText" (click)="Navigate('Beauty & Health', 'Vitamins & Dietary Supplements')">Vitamins & Dietary Supplements</li>
+						<li class="productText" (click)="Navigate('Beauty & Health', 'Subscribe & Save')">Subscribe & Save</li>
+						<li class="productText" (click)="Navigate('Beauty & Health', 'Prime Pantry')">Prime Pantry</li>
+						<li class="productText" (click)="Navigate('Beauty & Health', 'Sample Boxes')">Sample Boxes</li>
+					</ul>
+					<li data-toggle="collapse" class="productText" data-target="#collapseHandmade">Handmade<span>(15)</span></li>
+					<ul class="collapse" id="collapseHandmade">
+						<li (click)="Navigate('Handmade', 'All Handmade')">All Handmade</li>
+						<li (click)="Navigate('Handmade', 'Jewelry')">Jewelry</li>
+						<li (click)="Navigate('Handmade', 'Handbags & Accessories')">Handbags & Accessories</li>
+						<li (click)="Navigate('Handmade', 'Beauty & Grooming')">Beauty & Grooming</li>
+						<li (click)="Navigate('Handmade', 'Home Decor')">Home Decor</li>
+						<li (click)="Navigate('Handmade', 'Artwork')">Artwork</li>
+						<li (click)="Navigate('Handmade', 'Stationery & Party Supplies')">Stationery & Party Supplies</li>
+						<li (click)="Navigate('Handmade', 'Kitchen & Dining')">Kitchen & Dining</li>
+						<li (click)="Navigate('Handmade', 'Furniture')">Furniture</li>
+						<li (click)="Navigate('Handmade', 'Wedding')">Wedding</li>
+						<li (click)="Navigate('Handmade', 'Baby')">Baby</li>
+					</ul>
+					<li data-toggle="collapse" class="productText" data-target="#collapseSportsOutdoors">Sports & Outdoors<span>(15)</span></li>
+					<ul class="collapse" id="collapseSportsOutdoors">
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Athletic Clothing')">Athletic Clothing</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Exercise & Fitness')">Exercise & Fitness</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Hunting & Fishing')">Hunting & Fishing</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Team Sports')">Team Sports</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Fan Shop')">Fan Shop</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Golf')">Golf</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Leisure Sports & Game Room')">Leisure Sports & Game Room</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Sports Collectibles')">Sports Collectibles</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'All Sports & Fitness')">All Sports & Fitness</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'New Gear Innovations')">New Gear Innovations</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Camping & Hiking')">Camping & Hiking</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Cycling')">Cycling</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Outdoor Clothing')">Outdoor Clothing</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Scooters, Skateboards & Skates')">Scooters, Skateboards & Skates</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Winter Sports')">Winter Sports</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Climbing')">Climbing</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'Accessories')">Accessories</li>
+						<li class="productText" (click)="Navigate('Sports & Outdoors', 'All Outdoor Recreation')">All Outdoor Recreation</li>
+					</ul>
+				</ul>
+			</div>
+		</div>
+		<div class="col-md-8 products-right">
+			<div class="products-right-grid">
+				<div class="products-right-grids animated wow slideInRight" data-wow-delay=".5s">
+					<div class="sorting">
+						<select id="country" onchange="change_country(this.value)" class="frm-field required sect">
+								<option value="null">Default sorting</option>
+								<option value="null">Sort by popularity</option> 
+								<option value="null">Sort by average rating</option>					
+								<option value="null">Sort by price</option>								
+							</select>
+					</div>
+					<div class="sorting-left">
+						<select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
+								<option value="null">Item on page 9</option>
+								<option value="null">Item on page 18</option> 
+								<option value="null">Item on page 32</option>					
+								<option value="null">All</option>								
+							</select>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+			</div>
+			<div class="products-right-grids-bottom">
+				<div class="col-md-4 products-right-grids-bottom-grid">
+					<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+						<div class="new-collections-grid1-image">
+							<a href="single.html" class="product-image"><img src="assets/images/19.jpg" alt=" " class="img-responsive"></a>
+							<div class="new-collections-grid1-image-pos products-right-grids-pos">
+								<a href="single.html">Quick View</a>
+							</div>
+							<div class="new-collections-grid1-right products-right-grids-pos-right">
+								<div class="rating">
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<h4><a href="single.html">Formal Shirt</a></h4>
+						<p>Vel illum qui dolorem.</p>
+						<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+							<p> <span class="item_price">$250</span><a class="item_add" href="#">add to cart </a></p>
+						</div>
+					</div>
+					<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+						<div class="new-collections-grid1-image">
+							<a href="single.html" class="product-image"><img src="assets/images/21.jpg" alt=" " class="img-responsive"></a>
+							<div class="new-collections-grid1-image-pos products-right-grids-pos">
+								<a href="single.html">Quick View</a>
+							</div>
+							<div class="new-collections-grid1-right products-right-grids-pos-right">
+								<div class="rating">
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<h4><a href="single.html">Casual Shoes</a></h4>
+						<p>Vel illum qui dolorem.</p>
+						<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+							<p><span class="item_price">$250</span><a class="item_add" href="#">add to cart </a></p>
+						</div>
+					</div>
+					<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+						<div class="new-collections-grid1-image">
+							<a href="single.html" class="product-image"><img src="assets/images/24.jpg" alt=" " class="img-responsive"></a>
+							<div class="new-collections-grid1-image-pos products-right-grids-pos">
+								<a href="single.html">Quick View</a>
+							</div>
+							<div class="new-collections-grid1-right products-right-grids-pos-right">
+								<div class="rating">
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<h4><a href="single.html">Blazer</a></h4>
+						<p>Vel illum qui dolorem.</p>
+						<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+							<p><span class="item_price">$489</span><a class="item_add" href="#">add to cart </a></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 products-right-grids-bottom-grid">
+					<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+						<div class="new-collections-grid1-image">
+							<a href="single.html" class="product-image"><img src="assets/images/7.jpg" alt=" " class="img-responsive"></a>
+							<div class="new-collections-grid1-image-pos products-right-grids-pos">
+								<a href="single.html">Quick View</a>
+							</div>
+							<div class="new-collections-grid1-right products-right-grids-pos-right">
+								<div class="rating">
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<h4><a href="single.html">Formal Shirt</a></h4>
+						<p>Vel illum qui dolorem.</p>
+						<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+							<p><span class="item_price">$250</span><a class="item_add" href="#">add to cart </a></p>
+						</div>
+					</div>
+					<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+						<div class="new-collections-grid1-image">
+							<a href="single.html" class="product-image"><img src="assets/images/22.jpg" alt=" " class="img-responsive"></a>
+							<div class="new-collections-grid1-image-pos products-right-grids-pos">
+								<a href="single.html">Quick View</a>
+							</div>
+							<div class="new-collections-grid1-right products-right-grids-pos-right">
+								<div class="rating">
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<h4><a href="single.html">Casual Shoes</a></h4>
+						<p>Vel illum qui dolorem.</p>
+						<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+							<p><span class="item_price">$480</span><a class="item_add" href="#">add to cart </a></p>
+						</div>
+					</div>
+					<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+						<div class="new-collections-grid1-image">
+							<a href="single.html" class="product-image"><img src="assets/images/25.jpg" alt=" " class="img-responsive"></a>
+							<div class="new-collections-grid1-image-pos products-right-grids-pos">
+								<a href="single.html">Quick View</a>
+							</div>
+							<div class="new-collections-grid1-right products-right-grids-pos-right">
+								<div class="rating">
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<h4><a href="single.html">Blazer</a></h4>
+						<p>Vel illum qui dolorem.</p>
+						<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+							<p><span class="item_price">$489</span><a class="item_add" href="#">add to cart </a></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 products-right-grids-bottom-grid">
+					<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+						<div class="new-collections-grid1-image">
+							<a href="single.html" class="product-image"><img src="assets/images/20.jpg" alt=" " class="img-responsive"></a>
+							<div class="new-collections-grid1-image-pos products-right-grids-pos">
+								<a href="single.html">Quick View</a>
+							</div>
+							<div class="new-collections-grid1-right products-right-grids-pos-right">
+								<div class="rating">
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<h4><a href="single.html">Formal Shirt</a></h4>
+						<p>Vel illum qui dolorem.</p>
+						<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+							<p><span class="item_price">$280</span><a class="item_add" href="#">add to cart </a></p>
+						</div>
+					</div>
+					<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+						<div class="new-collections-grid1-image">
+							<a href="single.html" class="product-image"><img src="assets/images/23.jpg" alt=" " class="img-responsive"></a>
+							<div class="new-collections-grid1-image-pos products-right-grids-pos">
+								<a href="single.html">Quick View</a>
+							</div>
+							<div class="new-collections-grid1-right products-right-grids-pos-right">
+								<div class="rating">
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<h4><a href="single.html">Casual Shoes</a></h4>
+						<p>Vel illum qui dolorem.</p>
+						<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+							<p><span class="item_price">$299</span><a class="item_add" href="#">add to cart </a></p>
+						</div>
+					</div>
+					<div class="new-collections-grid1 products-right-grid1 animated wow slideInUp" data-wow-delay=".5s">
+						<div class="new-collections-grid1-image">
+							<a href="single.html" class="product-image"><img src="assets/images/26.jpg" alt=" " class="img-responsive"></a>
+							<div class="new-collections-grid1-image-pos products-right-grids-pos">
+								<a href="single.html">Quick View</a>
+							</div>
+							<div class="new-collections-grid1-right products-right-grids-pos-right">
+								<div class="rating">
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/2.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="rating-left">
+										<img src="assets/images/1.png" alt=" " class="img-responsive">
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</div>
+						<h4><a href="single.html">Blazer</a></h4>
+						<p>Vel illum qui dolorem.</p>
+						<div class="simpleCart_shelfItem products-right-grid1-add-cart">
+							<p><span class="item_price">$489</span><a class="item_add" href="#">add to cart </a></p>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<nav class="numbering animated wow slideInRight" data-wow-delay=".5s">
+				<ul class="pagination paging">
+					<li>
+						<a href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<li class="active"><a href="#">1<span class="sr-only">(current)</span></a></li>
+					<li><a href="#">2</a></li>
+					<li><a href="#">3</a></li>
+					<li><a href="#">4</a></li>
+					<li><a href="#">5</a></li>
+					<li>
+						<a href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+</div>

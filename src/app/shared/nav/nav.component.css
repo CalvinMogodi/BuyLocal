@@ -1,0 +1,24 @@
+.toggle-menu{
+    color: #FFFFFF
+}
+
+.links{
+    cursor: pointer;
+}
+
+.links :hover{
+    color: orange;
+}
+
+.productText{
+    font-weight: 500 !important;
+        font-size: .875em;
+    font-family: 'Lato', sans-serif;
+        color: #999 ;
+        cursor: pointer;
+}
+.productText:hover{
+        font-size: .9em;
+   text-decoration: underline;
+        color: orange;
+}
