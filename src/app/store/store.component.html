@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="products-left">
+        <div class="filter-price animated wow slideInUp" data-wow-delay=".5s">
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>My Stores</h3>
+                </div>
+                <div class="col-md-6">
+                    <div class="simpleCart_shelfItem products-right-grid1-add-cart">
+                        <button type="button" (click)="login()" class="add-store"  data-toggle="modal" data-target="#storeModal">Add A Store</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <!---->
+
+
+        </div>
+    </div>
+</div>
+
+<!-- Add/ Edit Store -->
+<div class="login modal fade" id="storeModal">
+    <div class="container" style="background-color: white; width: 50% !important;">
+	<button type="button" class="close" data-dismiss="modal" style="margin-right: -15px !important;"  aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+	<h3 class="animated wow" data-wow-delay=".5s">{{storeHeader}}</h3>
+    <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+        <form [formGroup]="storeForm" class="animated wow slideInUp" data-wow-delay=".5s">
+            <div>
+                <input type="text" style="background: none; background-color: white;" placeholder="Store Name" [value]="store.name" formControlName="name" (input)="store.name = $event.target.value"
+                    name="name">
+                    <div *ngIf="!storeForm.controls.name.valid && (storeForm.controls.name.dirty || submitAttempt)">
+                        <small class="red">The field above is required.</small>
+                    </div>
+            </div>
+            <div>
+                <input type="text" style="background: none; background-color: white;" placeholder="Description" [value]="store.description" formControlName="description" (input)="store.description = $event.target.value"
+                    name="description">
+                    <div *ngIf="!storeForm.controls.description.valid && (storeForm.controls.description.dirty || submitAttempt)">
+                        <small class="red">The field above is required.</small>
+                    </div>
+            </div>
+            <button type="button" (click)="addStore()" class="submit-btn">Submit</button>
+            <p *ngIf="showStoreError" style="color: red;font-size: small;text-align:center"> {{storeError}} </p>
+        </form>
+    </div>    
+    </div>
+</div>
+<!-- Add/ Edit Store  -->

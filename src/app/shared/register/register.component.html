@@ -1,5 +1,5 @@
 <div class="container" style="background-color: white; width: 70% !important;">
-	<button type="button" class="close" data-dismiss="modal" style="margin-right: -15px !important;" aria-label="Close">
+	<button type="button" class="close" data-dismiss="modal" style="margin-right: -15px !important;"  aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
 	<h3 class="animated wow" data-wow-delay=".5s">Register Here</h3>
@@ -8,9 +8,9 @@
 		<h5 class="animated wow slideInUp" data-wow-delay=".5s">profile information</h5>
 		<form [formGroup]="registerForm" class="animated wow slideInUp" data-wow-delay=".5s">
 			<div>
-				<input type="text" placeholder="First Name" [value]="user.firstName" formControlName="firstName" (input)="user.firstName = $event.target.value"
-					name="firstName" required="required">
-					<div *ngIf="!registerForm.controls.firstName.valid && (registerForm.controls.firstName.dirty || submitAttempt)">
+				<input type="text" placeholder="First Name" [value]="user.name" formControlName="name" (input)="user.name = $event.target.value"
+					name="name" required="required">
+					<div *ngIf="!registerForm.controls.name.valid && (registerForm.controls.name.dirty || submitAttempt)">
 						<small class="red">The field above is required.</small>
 					</div>
 			</div>
@@ -29,9 +29,9 @@
 			</div>
 			<h6 class="animated wow slideInUp" data-wow-delay=".5s">Login information</h6>
 			<div>
-				<input type="email" placeholder="Email Address" [value]="user.email" formControlName="email" (input)="user.email = $event.target.value"
-					name="email" required="required">
-					<div *ngIf="!registerForm.controls.email.valid && (registerForm.controls.email.dirty || submitAttempt)">
+				<input type="email" placeholder="Email Address" [value]="user.username" formControlName="username" (input)="user.username = $event.target.value"
+					name="username" required="required">
+					<div *ngIf="!registerForm.controls.username.valid && (registerForm.controls.username.dirty || submitAttempt)">
 						<small class="red">The field above is required.</small>
 					</div>
 			</div>
@@ -43,9 +43,9 @@
 					</div>
 			</div>
 			<div>
-				<input type="password" placeholder="Password Confirmation" ng-model="passwordConfirmation" (input)="user.passwordConfirmation = $event.target.value"
-					name="passwordConfirmation" required="required">
-					<div *ngIf="!registerForm.controls.password.valid && (registerForm.controls.password.dirty || submitAttempt)">
+				<input type="password" placeholder="Password Confirmation" ng-model="confirmPassword" (input)="confirmPassword = $event.target.value"
+					name="confirmPassword" required="required">
+					<div *ngIf="!registerForm.controls.confirmPassword.valid && (registerForm.controls.confirmPassword.dirty || submitAttempt)">
 						<small class="red">The field above is required.</small>
 					</div>
 			</div>
@@ -54,9 +54,9 @@
 					<label class="checkbox"><input type="checkbox" name="checkbox" (input)="tncCheck = $event.target.checked" [value]="tncCheck" ng-change="CheckTnC()"><i> </i>I accept the terms and conditions</label>
 				</div>
 			</div>
-			 <button  type="button" [disabled]="!tncCheck" class="register-btn" (click)="Register()">                  
-                    Register
-                </button>
+			 <button  type="button" [disabled]="!tncCheck" class="register-btn" (click)="Register()">Register</button>
+			 <p *ngIf="confirmPassword != user.password" style="color: red;font-size: small;text-align:center"> Passwords do not match. </p>
+			 <p *ngIf="showError" style="color: red;font-size: small;text-align:center"> {{errorMessage}} </p>
 		</form>
 	</div>
 	<br>

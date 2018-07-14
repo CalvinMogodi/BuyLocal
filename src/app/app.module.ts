@@ -4,6 +4,9 @@ import { AppRoutingModule } from './app.routing';
 import { RouterModule, provideRoutes } from '@angular/router';
 import { HashLocationStrategy, LocationStrategy} from '@angular/common'
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -15,6 +18,9 @@ import { ProductComponent } from './product/product.component';
 import { StoreComponent } from './store/store.component';
 import { CommonService } from './shared/common';
 import { CheckoutComponent } from './checkout/checkout.component';
+
+import { UserProvider } from './providers/user'; 
+import { StoreProvider } from './providers/store'; 
 
 @NgModule({
   declarations: [
@@ -34,10 +40,15 @@ import { CheckoutComponent } from './checkout/checkout.component';
     AppRoutingModule,
     RouterModule,
     FormsModule,
+     HttpModule,
+    HttpClientModule,
     ReactiveFormsModule,
   ],
   providers: [
     CommonService,
+    UserProvider,
+    StoreProvider,
+    HttpClient,
     {provide:LocationStrategy, useClass:HashLocationStrategy}
   ],
   bootstrap: [AppComponent]

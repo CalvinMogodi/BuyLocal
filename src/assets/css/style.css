@@ -315,7 +315,7 @@ a.simpleCart_empty {
 /*-- //header --*/
 /*-- banner --*/
 .banner{
-	background:url(../images/banner.jpg) no-repeat 0px 0px;
+	background:url(../images/banner.png) no-repeat 0px 0px;
 	background-size:cover;
 	-webkit-background-size:cover;
 	-moz-background-size:cover;
@@ -2409,7 +2409,7 @@ td.invert-image a img {
 	}
 	.navbar-collapse {
 		padding: 0;
-	}
+	} 
 	.navbar-nav > li > a {
 		padding: 25px 15px 0;
 	}
