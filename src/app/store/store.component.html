@@ -7,9 +7,80 @@
                 </div>
                 <div class="col-md-6">
                     <div class="simpleCart_shelfItem products-right-grid1-add-cart">
-                        <button type="button" (click)="login()" class="add-store"  data-toggle="modal" data-target="#storeModal">Add A Store</button>
+                        <button type="button" (click)="setStore(undefined)" class="add-store" data-toggle="modal" data-target="#storeModal">Add A Store</button>
                     </div>
                 </div>
+            </div>
+            <div>
+                <table class="table table-striped table-scroll">
+                    <thead>
+                        <tr>
+                            <th>Store Name</th>
+                            <th>Descrition</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let store of stores' style="font-size: 12px;" (click)="viewStoreProducts(store)">
+                            <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{ store.Name }}">{{ store.Name }}</label></td>
+                            <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{store.Description}}">{{ store.Description }}</label></td>
+                            <td style="text-align: start;">
+                                <i data-toggle="modal" data-target="#storeModal" title="Edit Store" class="glyphicon glyphicon-edit" style="font-size: 20px;margin-right: 25px;cursor: pointer"
+                                    (click)="setStore(store)"></i>
+                                    <i data-toggle="modal" data-target="#deleteStoreModal" title="Delete Store" class="glyphicon glyphicon-trash" style="font-size: 20px;margin-right: 25px;cursor: pointer;color: red"
+                                        (click)="setStore(store)"></i>
+                            </td>
+                        </tr>
+                        <tr *ngIf='stores.length == 0'>
+                            <td colspan="7" style="text-align: center;font-weight: bold;" *ngIf="!loading">No Store(s) Found</td>                           
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row" *ngIf="showProducts">
+                <div class="col-md-6">
+                    <h3>{{selectedStore.Name}} Products</h3>
+                </div>
+                <div class="col-md-6">
+                    <div class="simpleCart_shelfItem products-right-grid1-add-cart">
+                        <button type="button" (click)="setProduct(undefined)" class="add-store" data-toggle="modal" data-target="#productModal">Add A Product</button>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="showProducts">
+                <table class="table table-striped table-scroll">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Descrition</th>
+                            <th>Price</th>
+                            <th>Is On Special</th>
+                            <th>Discount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let product of products' style="font-size: 12px;">
+                            <td style="text-align: start;"><label>{{ product.Name }}</label></td>
+                            <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{product.Description}}">{{ product.Description }}</label></td>
+                            <td style="text-align: start;"><label>R {{ product.Price }}</label></td>
+                            <td style="text-align: start;" *ngIf="product.IsOnSpecial"><label>Yes</label></td> 
+                            <td style="text-align: start;" *ngIf="!product.IsOnSpecial"><label>No</label></td>                            
+                            <td style="text-align: start;"><label>{{ product.Discount }}</label></td>
+                            <td style="text-align: start;">
+                                <i data-toggle="modal" data-target="#productModal" title="Edit Product" class="glyphicon glyphicon-edit" style="font-size: 20px;margin-right: 25px;cursor: pointer"
+                                    (click)="setProduct(product)"></i>
+                                    <i data-toggle="modal" data-target="#deleteProductModal" title="Delete Product" class="glyphicon glyphicon-trash" style="font-size: 20px;margin-right: 25px;cursor: pointer;color: red"
+                                        (click)="setProduct(product)"></i>
+                            </td>
+                        </tr>
+                        <tr *ngIf='products.length == 0'>
+                            <td colspan="7" style="text-align: center;font-weight: bold;">No Product(s) Found</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
 
@@ -21,84 +92,108 @@
 </div>
 
 <!-- Add/ Edit Store -->
-<div class="login modal fade" id="storeModal">
+
+<div class="login modal fade" id="storeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="container" style="background-color: white; width: 50% !important;">
-	<button id="closeStoreModal" type="button" class="close" data-dismiss="modal" style="margin-right: -15px !important;"  aria-label="Close">
+        <button id="closeStoreModal" type="button" class="close" data-dismiss="modal" style="margin-right: -15px !important;" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-	<h3 class="animated wow" data-wow-delay=".5s">{{storeHeader}}</h3>
-    <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
-        <form [formGroup]="storeForm" class="animated wow slideInUp" data-wow-delay=".5s">
-            <div>
-                <input type="text" style="background: none; background-color: white;" placeholder="Store Name" [value]="store.name" formControlName="name" (input)="store.name = $event.target.value"
-                    name="name">
-                    <div *ngIf="!storeForm.controls.name.valid && (storeForm.controls.name.dirty || submitAttempt)">
-                        <small class="red">The field above is required.</small>
-                    </div>
-            </div>
-            <div>
-                <input type="text" style="background: none; background-color: white;" placeholder="Description" [value]="store.description" formControlName="description" (input)="store.description = $event.target.value"
-                    name="description">
-                    <div *ngIf="!storeForm.controls.description.valid && (storeForm.controls.description.dirty || submitAttempt)">
-                        <small class="red">The field above is required.</small>
-                    </div>
-            </div>
-            <button type="button" (click)="addStore()" class="submit-btn">Submit</button>
-            <button type="button" (click)="updateStore()" class="submit-btn" *ngIf="storeHeader == 'Edit Store'">Update Store</button>
-            <p *ngIf="showStoreError" style="color: red;font-size: small;text-align:center"> {{storeError}} </p>
-        </form>
-    </div>    
+        <h3 class="animated" data-wow-delay=".5s">{{storeHeader}}</h3>
+        <div class="login-form-grids animated slideInUp" style="width: 100% !important;margin: 0 !important" data-wow-delay=".5s">
+            <form [formGroup]="storeForm" class="animated slideInUp" data-wow-delay=".5s">
+                <div>
+                    <input type="text" style="background: none; background-color: white;padding-left: 15px;margin-bottom: 5px;" placeholder="Store Name" [value]="store.name" formControlName="name"
+                        (input)="store.name = $event.target.value" name="name">
+                        <div *ngIf="!storeForm.controls.name.valid && (storeForm.controls.name.dirty || submitAttempt)">
+                            <small class="red">The field above is required.</small>
+                        </div>
+                </div>
+                <div>
+                    <input type="text" style="background: none; background-color: white;padding-left: 15px;margin-bottom: 5px;" placeholder="Description" [value]="store.description"
+                        formControlName="description" (input)="store.description = $event.target.value" name="description">
+                        <div *ngIf="!storeForm.controls.description.valid && (storeForm.controls.description.dirty || submitAttempt)">
+                            <small class="red">The field above is required.</small>
+                        </div>
+                </div>
+                <button type="button" (click)="addStore()" class="submit-btn">Submit</button>
+                <button type="button" (click)="updateStore()" class="submit-btn" *ngIf="storeHeader == 'Edit Store'">Update Store</button>
+                <p *ngIf="showStoreError" style="color: red;font-size: small;text-align:center"> {{storeError}} </p>
+            </form>
+        </div>
+        <br>
     </div>
 </div>
 <!-- Add/ Edit Store  -->
 
 <!-- Add/ Edit Product -->
-<div class="login modal fade" id="productModal">
+<div class="login modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="container" style="background-color: white; width: 50% !important;">
-	<button type="button" id="closeProductModal" class="close" data-dismiss="modal" style="margin-right: -15px !important;"  aria-label="Close">
+        <button type="button" id="closeProductModal" class="close" data-dismiss="modal" style="margin-right: -15px !important;" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-	<h3 class="animated wow" data-wow-delay=".5s">{{productHeader}}</h3>
-    <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
-        <form [formGroup]="productForm" class="animated wow slideInUp" data-wow-delay=".5s">
-            <div>
-                <input type="text" style="background: none; background-color: white;" placeholder="Product Name" [value]="product.name" formControlName="name" (input)="product.name = $event.target.value"
-                    name="name">
-                    <div *ngIf="!productForm.controls.name.valid && (productForm.controls.name.dirty || submitAttempt)">
-                        <small class="red">The field above is required.</small>
+        <h4 class="modal-title"  data-wow-delay=".5s">{{productHeader}}</h4>
+        <div class="login-form-grids animated slideInUp" style="width: 100% !important;margin: 0 !important" data-wow-delay=".5s">
+            <form [formGroup]="productForm" class="animated slideInUp" data-wow-delay=".5s">
+                <div>
+                    <input type="text" style="background: none; background-color: white;padding-left: 15px;margin-bottom: 5px;" placeholder="Product Name" [value]="product.name" formControlName="name"
+                        (input)="product.name = $event.target.value" name="name">
+                        <div *ngIf="!productForm.controls.name.valid && (productForm.controls.name.dirty || submitAttempt)">
+                            <small class="red">The field above is required.</small>
+                        </div>
+                </div>
+                <div>
+                    <input type="text" style="background: none; background-color: white;padding-left: 15px;margin-bottom: 5px;" placeholder="Description" [value]="product.description"
+                        formControlName="description" (input)="product.description = $event.target.value" name="description">
+                        <div *ngIf="!productForm.controls.description.valid && (productForm.controls.description.dirty || submitAttempt)">
+                            <small class="red">The field above is required.</small>
+                        </div>
+                </div>
+                <div>
+                    <input type="number" style="background: none; background-color: white;padding-left: 15px;margin-bottom: 5px;outline: none; border: 1px solid #DBDBDB;padding: 10px 10px 10px 45px;font-size: 14px;color: #999;display: block;width: 100%;" placeholder="Price" [value]="product.price" formControlName="price"
+                        (input)="product.price = $event.target.value" name="price">
+                        <div *ngIf="!productForm.controls.price.valid && (productForm.controls.price.dirty || submitAttempt)">
+                            <small class="red">The field above is required.</small>
+                        </div>
+                </div>
+                <div>
+                    <div class="check">
+                        <label class="checkbox"><input type="checkbox" formControlName="isOnSpecial" (input)="product.isOnSpecial = $event.target.value" name="isOnSpecial"><i> </i>Is On Special</label>
                     </div>
-            </div>
-            <div>
-                <input type="text" style="background: none; background-color: white;" placeholder="Description" [value]="product.description" formControlName="description" (input)="product.description = $event.target.value"
-                    name="description">
-                    <div *ngIf="!productForm.controls.description.valid && (productForm.controls.description.dirty || submitAttempt)">
-                        <small class="red">The field above is required.</small>
-                    </div>
-            </div>
-            <div>
-                <input type="number" style="background: none; background-color: white;" placeholder="Price" [value]="product.price" formControlName="price" (input)="product.price = $event.target.value"
-                    name="price">
-                    <div *ngIf="!productForm.controls.price.valid && (productForm.controls.price.dirty || submitAttempt)">
-                        <small class="red">The field above is required.</small>
-                    </div>
-            </div>
-            <div>
-				<div class="check">
-					<label class="checkbox"><input type="checkbox" formControlName="isOnSpecial" (input)="product.isOnSpecial = $event.target.value" name="isOnSpecial"><i> </i>Is On Special</label>
-				</div>
-			</div>
-            <div>
-                <input type="text" style="background: none; background-color: white;" placeholder="discount" [value]="product.discount" formControlName="discount" (input)="product.discount = $event.target.value"
-                    name="discount">
-                    <div *ngIf="!productForm.controls.discount.valid && (productForm.controls.discount.dirty || submitAttempt)">
-                        <small class="red">The field above is required.</small>
-                    </div>
-            </div>
-            <button type="button" (click)="addProduct()" class="submit-btn">Submit</button>
-            <button type="button" (click)="updateProduct()" class="submit-btn" *ngIf="productHeader == 'Edit Product'">Update</button>
-            <p *ngIf="showProductError" style="color: red;font-size: small;text-align:center"> {{productError}} </p>
-        </form>
-    </div>    
+                </div>
+                <div>
+                    <input type="number" style="background: none; background-color: white;padding-left: 15px;margin-bottom: 5px;outline: none; border: 1px solid #DBDBDB;padding: 10px 10px 10px 45px;font-size: 14px;color: #999;display: block;width: 100%;" placeholder="Discount" [value]="product.discount" formControlName="discount"
+                        (input)="product.discount = $event.target.value" name="discount">
+                        <div *ngIf="!productForm.controls.discount.valid && (productForm.controls.discount.dirty || submitAttempt)">
+                            <small class="red">The field above is required.</small>
+                        </div>
+                </div>
+                <button type="button" (click)="addProduct()" class="submit-btn">Submit</button>
+                <button type="button" (click)="updateProduct()" class="submit-btn" *ngIf="productHeader == 'Edit Product'">Update</button>
+                <p *ngIf="showProductError" style="color: red;font-size: small;text-align:center"> {{productError}} </p>
+            </form>
+        </div>
+        <br>
     </div>
 </div>
 <!-- Add/ Edit Store  -->
+
+<!-- Delete Store Modal -->
+<div class="modal fade" id="deleteStoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Delete Store</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this store?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="deleteStore()">Delete Store</button>
+            </div>
+        </div>
+    </div>
+</div>

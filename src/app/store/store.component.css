@@ -24,3 +24,19 @@
 .red{
     color: red;
 }
+
+.text-overflow{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.modal-form{
+    padding: 3em;
+    background: #F7F7F9;
+}
+
+input{
+        padding-left: 15px;
+    margin-bottom: 5px;
+}

@@ -10,6 +10,13 @@ import { StoreProvider } from '../providers/store';
 })
 export class StoreComponent {
   public currentUser: any;
+  public selectedStore = {
+    Name: '',
+    Description: '',
+    UserId: 0,
+    CreatedDate: '',
+    Id:0
+  };
   public storeForm: FormGroup;
   public productForm: FormGroup;
   public submitStoreAttempt: boolean = false;
@@ -20,7 +27,9 @@ export class StoreComponent {
   public productError = '';
   public storeHeader = 'Add Store';
   public productHeader = 'Add Product';
+  public showProducts: boolean = false;
   public stores = [];
+  public products = [];
   public store = {
     name: '',   
     description: '',
@@ -30,13 +39,23 @@ export class StoreComponent {
   public product = {
     name: '',   
     description: '',
-    price: 0.00,
+    price: '',
     isOnSpecial: false,
-    discount: 0.00,
+    discount: '',
     imageName: '',
-    storeId: '',
+    storeId: 0,
     createdDate: '',
   };
+  public selectedProduct = {
+    name: '',   
+    description: '',
+    price: '',
+    isOnSpecial: false,
+    discount: '',
+    imageName: '',
+    storeId: 0,
+    createdDate: '',
+  }
   constructor(public formBuilder: FormBuilder, public storeProvider: StoreProvider, public router: Router) {
      this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
       this.storeForm = formBuilder.group({
@@ -49,6 +68,7 @@ export class StoreComponent {
       description: [this.product.description, Validators.compose([Validators.required])],
       price: [this.product.price, Validators.compose([Validators.required])],
       discount: [this.product.discount],
+      isOnSpecial: [this.product.isOnSpecial]
     });
 
      this.storeProvider.getStoreByUserId({userId: this.currentUser.Id}).subscribe((response: any) => {
@@ -80,6 +100,49 @@ export class StoreComponent {
     }
   }
 
+  setStore(store){
+    if(store != undefined)
+      this.selectedStore = store;
+    else
+      this.selectedStore = {
+         Name: '',
+    Description: '',
+    UserId: 0,
+    CreatedDate: '',
+    Id:0
+      };
+  }
+
+  setProduct(product){
+    if(product != undefined)
+      this.selectedProduct = product;
+    else
+      this. selectedProduct = {
+    name: '',   
+    description: '',
+    price: '',
+    isOnSpecial: false,
+    discount: '',
+    imageName: '',
+    storeId: 0,
+    createdDate: '',
+  }
+  }
+
+  viewStoreProducts(store){
+    this.products = [];
+    this.showProducts = true;
+    this.selectedStore = store;
+
+     this.storeProvider.getProductsStoreById({storeId: store.Id}).subscribe((response: any) => {
+        this.products = response;
+     });
+  }
+
+  deleteStore(){
+
+  }
+
    updateStore(){
     this.submitStoreAttempt = true;
     this.showStoreError = false;
@@ -91,6 +154,8 @@ export class StoreComponent {
     this.showProductError = false;
     this.productError = '';
     if (this.productForm.valid) {
+      this.product.createdDate = new Date().toString();
+      this.product.storeId = this.selectedStore.Id;
        this.storeProvider.addProduct(this.product).subscribe((response: any) => {
         if (response.result && response.errorMessage == null) {
           let element: HTMLElement = document.getElementById('closeProductModal') as HTMLElement;
@@ -131,11 +196,11 @@ export class StoreComponent {
     this.product = {
       name: '',   
       description: '',
-      price: 0.00,
+      price: '',
       isOnSpecial: false,
-      discount: 0.00,
+      discount: '',
       imageName: '',
-      storeId: '',
+      storeId: 0,
       createdDate: '',
     };
   }
