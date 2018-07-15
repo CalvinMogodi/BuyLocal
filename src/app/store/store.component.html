@@ -23,7 +23,7 @@
 <!-- Add/ Edit Store -->
 <div class="login modal fade" id="storeModal">
     <div class="container" style="background-color: white; width: 50% !important;">
-	<button type="button" class="close" data-dismiss="modal" style="margin-right: -15px !important;"  aria-label="Close">
+	<button id="closeStoreModal" type="button" class="close" data-dismiss="modal" style="margin-right: -15px !important;"  aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
 	<h3 class="animated wow" data-wow-delay=".5s">{{storeHeader}}</h3>
@@ -44,7 +44,59 @@
                     </div>
             </div>
             <button type="button" (click)="addStore()" class="submit-btn">Submit</button>
+            <button type="button" (click)="updateStore()" class="submit-btn" *ngIf="storeHeader == 'Edit Store'">Update Store</button>
             <p *ngIf="showStoreError" style="color: red;font-size: small;text-align:center"> {{storeError}} </p>
+        </form>
+    </div>    
+    </div>
+</div>
+<!-- Add/ Edit Store  -->
+
+<!-- Add/ Edit Product -->
+<div class="login modal fade" id="productModal">
+    <div class="container" style="background-color: white; width: 50% !important;">
+	<button type="button" id="closeProductModal" class="close" data-dismiss="modal" style="margin-right: -15px !important;"  aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+	<h3 class="animated wow" data-wow-delay=".5s">{{productHeader}}</h3>
+    <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+        <form [formGroup]="productForm" class="animated wow slideInUp" data-wow-delay=".5s">
+            <div>
+                <input type="text" style="background: none; background-color: white;" placeholder="Product Name" [value]="product.name" formControlName="name" (input)="product.name = $event.target.value"
+                    name="name">
+                    <div *ngIf="!productForm.controls.name.valid && (productForm.controls.name.dirty || submitAttempt)">
+                        <small class="red">The field above is required.</small>
+                    </div>
+            </div>
+            <div>
+                <input type="text" style="background: none; background-color: white;" placeholder="Description" [value]="product.description" formControlName="description" (input)="product.description = $event.target.value"
+                    name="description">
+                    <div *ngIf="!productForm.controls.description.valid && (productForm.controls.description.dirty || submitAttempt)">
+                        <small class="red">The field above is required.</small>
+                    </div>
+            </div>
+            <div>
+                <input type="number" style="background: none; background-color: white;" placeholder="Price" [value]="product.price" formControlName="price" (input)="product.price = $event.target.value"
+                    name="price">
+                    <div *ngIf="!productForm.controls.price.valid && (productForm.controls.price.dirty || submitAttempt)">
+                        <small class="red">The field above is required.</small>
+                    </div>
+            </div>
+            <div>
+				<div class="check">
+					<label class="checkbox"><input type="checkbox" formControlName="isOnSpecial" (input)="product.isOnSpecial = $event.target.value" name="isOnSpecial"><i> </i>Is On Special</label>
+				</div>
+			</div>
+            <div>
+                <input type="text" style="background: none; background-color: white;" placeholder="discount" [value]="product.discount" formControlName="discount" (input)="product.discount = $event.target.value"
+                    name="discount">
+                    <div *ngIf="!productForm.controls.discount.valid && (productForm.controls.discount.dirty || submitAttempt)">
+                        <small class="red">The field above is required.</small>
+                    </div>
+            </div>
+            <button type="button" (click)="addProduct()" class="submit-btn">Submit</button>
+            <button type="button" (click)="updateProduct()" class="submit-btn" *ngIf="productHeader == 'Edit Product'">Update</button>
+            <p *ngIf="showProductError" style="color: red;font-size: small;text-align:center"> {{productError}} </p>
         </form>
     </div>    
     </div>
