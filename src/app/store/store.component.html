@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="simpleCart_shelfItem products-right-grid1-add-cart">
-                        <button type="button" (click)="setStore(undefined)" class="add-store" data-toggle="modal" data-target="#storeModal">Add A Store</button>
+                        <button type="button" (click)="setStore(undefined, -1)" class="add-store" data-toggle="modal" data-target="#storeModal">Add A Store</button>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                             <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{store.Description}}">{{ store.Description }}</label></td>
                             <td style="text-align: start;">
                                 <i data-toggle="modal" data-target="#storeModal" title="Edit Store" class="glyphicon glyphicon-edit" style="font-size: 20px;margin-right: 25px;cursor: pointer"
-                                    (click)="setStore(store)"></i>
+                                    (click)="setStore(store, $index)"></i>
                             </td>
                         </tr>
                         <tr *ngIf='stores.length == 0'>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="simpleCart_shelfItem products-right-grid1-add-cart">
-                        <button type="button" (click)="setProduct(undefined)" class="add-store" data-toggle="modal" data-target="#productModal">Add A Product</button>
+                        <button type="button" (click)="setProduct(undefined, -1)" class="add-store" data-toggle="modal" data-target="#productModal">Add A Product</button>
                     </div>
                 </div>
             </div>
@@ -60,18 +60,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor='let product of products' style="font-size: 12px;">
+                        <tr *ngFor='let product of products; let i = index' style="font-size: 12px;">
                             <td style="text-align: start;"><label>{{ product.Name }}</label></td>
                             <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{product.Description}}">{{ product.Description }}</label></td>
                             <td style="text-align: start;"><label>R {{ product.Price }}</label></td>
-                            <td style="text-align: start;" *ngIf="product.IsOnSpecial"><label>Yes</label></td>
-                            <td style="text-align: start;" *ngIf="!product.IsOnSpecial"><label>No</label></td>
+                            <td style="text-align: start;" *ngIf="product.IsOnSpecial == 1"><label>Yes</label></td>
+                            <td style="text-align: start;" *ngIf="product.IsOnSpecial != 1"><label>No</label></td>
                             <td style="text-align: start;"><label>{{ product.Discount }}</label></td>
                             <td style="text-align: start;">
                                 <i data-toggle="modal" data-target="#productModal" title="Edit Product" class="glyphicon glyphicon-edit" style="font-size: 20px;margin-right: 25px;cursor: pointer"
-                                    (click)="setProduct(product)"></i>
+                                    (click)="setProduct(product, i)"></i>
                                     <i data-toggle="modal" data-target="#deleteProductModal" title="Delete Product" class="glyphicon glyphicon-trash" style="font-size: 20px;margin-right: 25px;cursor: pointer;color: red"
-                                        (click)="setProduct(product)"></i>
+                                        (click)="setProduct(product, i)"></i>
                             </td>
                         </tr>
                         <tr *ngIf='products.length == 0'>
@@ -114,7 +114,7 @@
                             <small class="red">The field above is required.</small>
                         </div>
                 </div>
-                <button type="button" (click)="addStore()" class="submit-btn">Submit</button>
+                <button type="button" (click)="addStore()" class="submit-btn" *ngIf="storeHeader != 'Edit Store'">Submit</button>
                 <button type="button" (click)="updateStore()" class="submit-btn" *ngIf="storeHeader == 'Edit Store'">Update Store</button>
                 <p *ngIf="showStoreError" style="color: red;font-size: small;text-align:center"> {{storeError}} </p>
             </form>
@@ -158,7 +158,7 @@
                 </div>
                 <div>
                     <div class="check">
-                        <label class="checkbox"><input type="checkbox" formControlName="isOnSpecial" (input)="product.isOnSpecial = $event.target.value" name="isOnSpecial"><i> </i>Is On Special</label>
+                        <label class="checkbox"><input type="checkbox" formControlName="isOnSpecial" [checked]="product.isOnSpecial" (change)="product.isOnSpecial = !product.isOnSpecial" name="isOnSpecial"><i> </i>Is On Special</label>
                     </div>
                 </div>
                 <div>
@@ -171,13 +171,14 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="{{base64Image}}" alt="Product Image" width="300" height="400" class="img-responsive" />
+                        <img src="{{base64Image}}" alt="Product Image" width="300" height="400" class="img-responsive" *ngIf="serverImgurl == ''"/>
+                        <img src="{{serverImgurl}}" alt="Product Image" width="300" height="400" class="img-responsive" *ngIf="serverImgurl != ''"/>
                     </div>
                     <div class="col-md-6">
                         <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
                     </div>
                 </div>
-                <button type="button" (click)="addProduct()" class="submit-btn">Submit</button>
+                <button type="button" (click)="addProduct()" class="submit-btn" *ngIf="productHeader != 'Edit Product'">Submit</button>
                 <button type="button" (click)="updateProduct()" class="submit-btn" *ngIf="productHeader == 'Edit Product'">Update</button>
                 <p *ngIf="showProductError" style="color: red;font-size: small;text-align:center"> {{productError}} </p>
             </form>

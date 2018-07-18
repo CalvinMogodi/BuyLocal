@@ -31,7 +31,7 @@ export class StoreProvider {
     }
 
     deleteProduct(parameters) {
-        return this.http.post(this.url + "/deleteProduct", parameters);
+        return this.http.post(this.url + "/deleteProductById", parameters);
     }
 
     uploadProductImage(file) {
