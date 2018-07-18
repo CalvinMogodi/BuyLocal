@@ -2,8 +2,9 @@
   <div class="header-grid">
     <div class="header-grid-left animated wow slideInLeft" data-wow-delay=".5s">
       <ul>
-        <li class="links" data-toggle="modal" data-target="#loginModal"><i class="glyphicon glyphicon-log-in links" aria-hidden="true"></i><span>Login</span></li>
-        <li class="links" data-toggle="modal" data-target="#registerModal"><i class="glyphicon glyphicon-book" aria-hidden="true"></i><span>Register</span></li>
+        <li class="links" (click)="logout()" *ngIf="showlogout"><i class="glyphicon glyphicon-log-out links" aria-hidden="true"></i><span>Logout</span></li>
+        <li class="links" data-toggle="modal" data-target="#loginModal" *ngIf="!showlogout"><i class="glyphicon glyphicon-log-in links" aria-hidden="true"></i><span>Login</span></li>
+        <li class="links" data-toggle="modal" data-target="#registerModal" *ngIf="!showlogout"><i class="glyphicon glyphicon-book" aria-hidden="true"></i><span>Register</span></li>
       </ul>
     </div>
     <div class="header-grid-right animated wow slideInRight" data-wow-delay=".5s">

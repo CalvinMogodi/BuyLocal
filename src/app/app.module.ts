@@ -21,6 +21,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 
 import { UserProvider } from './providers/user'; 
 import { StoreProvider } from './providers/store'; 
+import { ProductProvider } from './providers/product'; 
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { StoreProvider } from './providers/store';
     CommonService,
     UserProvider,
     StoreProvider,
+    ProductProvider,
     HttpClient,
     {provide:LocationStrategy, useClass:HashLocationStrategy}
   ],

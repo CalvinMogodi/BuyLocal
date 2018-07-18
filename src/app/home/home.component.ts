@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductProvider } from '../providers/product';
 
 @Component({
   selector: 'app-home',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class HomeComponent {
   title = 'app';
+  public products = [];
+  public currentUser: any;
+  constructor(public productProvider: ProductProvider) {
+    this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.productProvider.getSpecialDeals().subscribe((response: any) => {
+      this.products = response;
+    });
+  }
 }

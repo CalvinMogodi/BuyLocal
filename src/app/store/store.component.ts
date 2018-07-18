@@ -125,7 +125,7 @@ export class StoreComponent {
   }
 
   setStore(store, index) {
-     this.storeHeader = 'Add Store';
+    this.storeHeader = 'Add Store';
     if (store != undefined) {
       this.selectedStore = store;
       this.selectedStore.index = index;
@@ -165,10 +165,10 @@ export class StoreComponent {
       this.product.name = product.Name;
       this.product.description = product.Description;
       this.product.price = product.Price;
-      if(product.IsOnSpecial == 1)
+      if (product.IsOnSpecial == 1)
         this.product.isOnSpecial = true;
       else
-         this.product.isOnSpecial = false;
+        this.product.isOnSpecial = false;
       this.product.discount = product.Discount;
       this.product.id = product.Id;
       this.product.imageName = product.ImageName;
@@ -250,6 +250,10 @@ export class StoreComponent {
     this.showProductError = false;
     this.productError = '';
     if (this.productForm.valid) {
+      if (this.product.isOnSpecial) {
+        if (this.product.discount >= this.product.price)
+          return false;
+      }
       this.storeProvider.productisDuplicate({ storeId: this.selectedStore.Id, name: this.product.name }).subscribe((response: any) => {
         if (!response.result) {
           this.storeProvider.uploadProductImage(this.base64Image).subscribe((response: any) => {
@@ -280,35 +284,40 @@ export class StoreComponent {
     this.submitProductAttempt = true;
     this.showProductError = false;
     this.productError = '';
-    if (this.product.name != '' && this.product.description != '' && this.product.price != '' ) {
-        if (this.serverImgurl == '') {
-          this.storeProvider.uploadProductImage(this.base64Image).subscribe((response: any) => {
-            this.product.imageName = response;
-            this.storeProvider.updateProduct(this.product).subscribe((response: any) => {
-              if (response.result && response.errorMessage == null) {
-                let element: HTMLElement = document.getElementById('closeProductModal') as HTMLElement;
-                element.click();
-                this.clear();
-                this.viewStoreProducts(this.selectedStore)
-              } else {
-                this.showProductError = true;
-                this.productError = 'We are unable to update your product right now, Please try again later.';
-              }
-            })
+    if (this.product.name != '' && this.product.description != '' && this.product.price != '') {
+      if (this.product.isOnSpecial) {
+        if (this.product.discount >= this.product.price)
+          return false;
+      }
+      this.product.createdDate = new Date().toString();
+      if (this.serverImgurl == '') {
+        this.storeProvider.uploadProductImage(this.base64Image).subscribe((response: any) => {
+          this.product.imageName = response;
+          this.storeProvider.updateProduct(this.product).subscribe((response: any) => {
+            if (response.result && response.errorMessage == null) {
+              let element: HTMLElement = document.getElementById('closeProductModal') as HTMLElement;
+              element.click();
+              this.clear();
+              this.viewStoreProducts(this.selectedStore)
+            } else {
+              this.showProductError = true;
+              this.productError = 'We are unable to update your product right now, Please try again later.';
+            }
           })
-        } else {
-            this.storeProvider.updateProduct(this.product).subscribe((response: any) => {
-              if (response.result && response.errorMessage == null) {
-                let element: HTMLElement = document.getElementById('closeProductModal') as HTMLElement;
-                element.click();
-                this.clear();
-                this.viewStoreProducts(this.selectedStore)
-              } else {
-                this.showProductError = true;
-                this.productError = 'We are unable to update your product right now, Please try again later.';
-              }          
-          })
-        }
+        })
+      } else {
+        this.storeProvider.updateProduct(this.product).subscribe((response: any) => {
+          if (response.result && response.errorMessage == null) {
+            let element: HTMLElement = document.getElementById('closeProductModal') as HTMLElement;
+            element.click();
+            this.clear();
+            this.viewStoreProducts(this.selectedStore)
+          } else {
+            this.showProductError = true;
+            this.productError = 'We are unable to update your product right now, Please try again later.';
+          }
+        })
+      }
     }
   }
 

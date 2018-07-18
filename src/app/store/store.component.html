@@ -66,7 +66,7 @@
                             <td style="text-align: start;"><label>R {{ product.Price }}</label></td>
                             <td style="text-align: start;" *ngIf="product.IsOnSpecial == 1"><label>Yes</label></td>
                             <td style="text-align: start;" *ngIf="product.IsOnSpecial != 1"><label>No</label></td>
-                            <td style="text-align: start;"><label>{{ product.Discount }}</label></td>
+                            <td style="text-align: start;"><label>R {{ product.Discount }}</label></td>
                             <td style="text-align: start;">
                                 <i data-toggle="modal" data-target="#productModal" title="Edit Product" class="glyphicon glyphicon-edit" style="font-size: 20px;margin-right: 25px;cursor: pointer"
                                     (click)="setProduct(product, i)"></i>
@@ -161,13 +161,14 @@
                         <label class="checkbox"><input type="checkbox" formControlName="isOnSpecial" [checked]="product.isOnSpecial" (change)="product.isOnSpecial = !product.isOnSpecial" name="isOnSpecial"><i> </i>Is On Special</label>
                     </div>
                 </div>
-                <div>
+                <div *ngIf="product.isOnSpecial">
                     <input type="number" style="background: none; background-color: white;padding-left: 15px;margin-bottom: 5px;outline: none; border: 1px solid #DBDBDB;padding: 10px 10px 10px 45px;font-size: 14px;color: #999;display: block;width: 100%;"
-                        placeholder="Discount" [value]="product.discount" formControlName="discount" (input)="product.discount = $event.target.value"
+                        placeholder="Special Price" [value]="product.discount" formControlName="discount" (input)="product.discount = $event.target.value"
                         name="discount">
                         <div *ngIf="!productForm.controls.discount.valid && (productForm.controls.discount.dirty || submitAttempt)">
                             <small class="red">The field above is required.</small>
                         </div>
+                        <p *ngIf="product.discount >= product.price" style="color: red;font-size: small;text-align:start"> Special price must be less than normal price </p>
                 </div>
                 <div class="row">
                     <div class="col-md-6">

@@ -33,8 +33,8 @@ export class LoginComponent {
         if (response.result) {
           let element: HTMLElement = document.getElementById('closeModal') as HTMLElement;
           element.click();
-          if(response.data.UserType == 'Supplier'){           
-            sessionStorage.setItem('currentUser', JSON.stringify(response.data));
+          sessionStorage.setItem('currentUser', JSON.stringify(response.data));
+          if(response.data.UserType == 'Supplier'){ 
             this.router.navigate(['store']);            
           }else{
             this.router.navigate(['product']);  

@@ -9,14 +9,23 @@ declare const $: any;
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
+  public showlogout: boolean = false;
 
-  constructor(public router: Router, public commonService: CommonService) { }
+  constructor(public router: Router, public commonService: CommonService) {
+    router.events.subscribe((url:any) => { 
+    let currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+    if (currentUser == null) {
+      this.showlogout = false;
+    } else {
+      this.showlogout = true;
+    }});
+  }
 
   ngOnInit() {
   }
 
   Navigate(gategory, product) {
-    this.commonService.assginProductSearch({gategory: gategory, product: product,});
+    this.commonService.assginProductSearch({ gategory: gategory, product: product, });
     this.router.navigate(['/product']);
   }
   NavigateTo(url) {
@@ -30,11 +39,10 @@ export class NavComponent implements OnInit {
     return true;
   };
 
-  /*logout(url) {
-    this.userService.signOut().then(authData => {
-       sessionStorage.setItem('currentUser', JSON.stringify(null));
-       this.router.navigate([url]);
-    });
-  }*/
+  logout() {
+    sessionStorage.setItem('currentUser', JSON.stringify(null));
+    this.showlogout = false;
+    this.router.navigate(['home']);
+  }
 
 }
