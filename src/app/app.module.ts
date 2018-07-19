@@ -18,6 +18,7 @@ import { ProductComponent } from './product/product.component';
 import { StoreComponent } from './store/store.component';
 import { CommonService } from './shared/common';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { SingleComponent } from './single/single.component';
 
 import { UserProvider } from './providers/user'; 
 import { StoreProvider } from './providers/store'; 
@@ -33,7 +34,8 @@ import { ProductProvider } from './providers/product';
     FooterComponent,
     ProductComponent,
     StoreComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    SingleComponent
   ],
  exports: [RouterModule],
   imports: [
@@ -51,7 +53,8 @@ import { ProductProvider } from './providers/product';
     StoreProvider,
     ProductProvider,
     HttpClient,
-    {provide:LocationStrategy, useClass:HashLocationStrategy}
+    {provide:LocationStrategy, useClass:HashLocationStrategy},
+    
   ],
   bootstrap: [AppComponent]
 })

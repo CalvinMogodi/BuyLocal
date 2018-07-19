@@ -48,13 +48,13 @@
 				<div class="col-md-3 new-collections-grid" *ngFor='let product of products; let i = index'>
 					<div class="new-collections-grid1 animated wow slideInUp" data-wow-delay=".5s" style="height: 480px !important; margin-top: 15px !important;">
 						<div class="new-collections-grid1-image">
-							<a href="single.html" class="product-image"><img src="{{serverImgurl+product.ImageName}}" alt=" " class="img-responsive" /></a>
+							<label data-toggle="modal" data-target="#singleModal" (click)="setProductToView(product)" class="product-image"><img src="{{serverImgurl+product.ImageName}}" alt=" " class="img-responsive" /></label>
 							<div class="new-collections-grid1-image-pos">
-								<a href="single.html">Quick View</a>
+								<a style="cursor: pointer" data-toggle="modal"  (click)="setProductToView(product)" data-target="#singleModal">Quick View</a>
 							</div>
 						</div>
 						<div style="position: absolute; bottom: 0;">
-						<h4><a href="single.html">{{product.Name}}</a></h4>
+						<h4><label data-toggle="modal" data-target="#singleModal" (click)="setProductToView(product)">{{product.Name}}</label></h4>
 						<p data-toggle="tooltip" data-placement="top" title="{{ product.Description }}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 230px;">{{product.Description}}</p>
 						<div class="new-collections-grid1-left simpleCart_shelfItem">
 							<p><i>R {{product.Price}}</i> <span class="item_price">R {{product.Discount}} </span></p>
@@ -83,6 +83,124 @@
 		</div>
 	</div>
 <!-- //collections-bottom -->
+
+
+<!-- Single Modal -->
+<div class="modal fade" style="margin-top: 100px;" id="singleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="container" style="background-color: white; width: 70% !important;">
+    <button type="button" class="close" data-dismiss="modal" style="font-size: 30px; margin-right: -10px !important;" id="closeModal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    <div class="col-md-8 single-right">
+        <div class="col-md-5 single-right-left animated slideInUp" data-wow-delay=".5s">
+            <div>
+				<img src="{{serverImgurl+productToView.ImageName}}" data-imagezoom="true" class="img-responsive">
+				<br>
+				<div class="row">
+					<div class="col-sm-2" style="width: 30%; height: 60%">
+						<img src="{{serverImgurl+productToView.ImageName}}" class="img-responsive">
+					</div>
+					<div class="col-sm-2" style="width: 30%; height: 60%;margin-left: -21px;">
+						<img src="{{serverImgurl+productToView.ImageName}}" class="img-responsive">
+					</div>
+					<div class="col-sm-2" style="width: 30%; height: 60%;margin-left: -21px;">
+						<img src="{{serverImgurl+productToView.ImageName}}" class="img-responsive">
+					</div>
+					<div class="col-sm-2" style="width: 30%; height: 60%;margin-left: -21px; float: right">
+						<img src="{{serverImgurl+productToView.ImageName}}" class="img-responsive">
+					</div>
+				</div>    
+					<br>            
+            </div>
+        </div>
+        <div class="col-md-7 single-right-left simpleCart_shelfItem animated slideInRight" data-wow-delay=".5s">
+            <h3>{{productToView.Name}}</h3>
+            <h4 *ngIf="!productToView.IsOnSpecial"><span class="item_price">R {{productToView.Price}}</span></h4>
+            <div class="new-collections-grid1-left simpleCart_shelfItem" *ngIf="productToView.IsOnSpecial">
+		        <p><i>R {{productToView.Price}}</i> <span class="item_price">R {{productToView.Discount}} </span></p>
+		    </div>
+            <div class="rating1">
+                <span class="starRating">
+							<input id="rating5" type="radio" name="rating" value="5">
+							<label for="rating5">5</label>
+							<input id="rating4" type="radio" name="rating" value="4">
+							<label for="rating4">4</label>
+							<input id="rating3" type="radio" name="rating" value="3" checked>
+							<label for="rating3">3</label>
+							<input id="rating2" type="radio" name="rating" value="2">
+							<label for="rating2">2</label>
+							<input id="rating1" type="radio" name="rating" value="1">
+							<label for="rating1">1</label>
+						</span>
+            </div>
+            <div class="description">
+                <h5><i>Description</i></h5>
+                <p>{{productToView.Description}}</p>
+            </div>
+            <div class="color-quality">
+                <div class="color-quality-left">
+                    <h5>Color : </h5>
+                    <ul>
+                        <li><a href="#"><span></span>Red</a></li>
+                        <li><a href="#" class="brown"><span></span>Yellow</a></li>
+                        <li><a href="#" class="purple"><span></span>Purple</a></li>
+                        <li><a href="#" class="gray"><span></span>Violet</a></li>
+                    </ul>
+                </div>
+                <div class="color-quality-right">
+                    <h5>Quality :</h5>
+                    <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
+								<option value="1">1 Qty</option>
+								<option value="2">2 Qty</option> 
+								<option value="3">3 Qty</option>	
+								<option value="4">4 Qty</option>				
+								<option value="5">5 Qty</option>		
+								<option value="6">6 Qty</option>
+								<option value="7">7 Qty</option>
+								<option value="8">8 Qty</option>
+								<option value="9">9 Qty</option>
+								<option value="10">10 Qty</option>	
+								<option value="11">11 Qty</option>
+								<option value="12">12 Qty</option>
+								<option value="13">13 Qty</option>
+								<option value="14">14 Qty</option>	
+								<option value="15">15 Qty</option>				
+							</select>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+			<br>
+            <div class="occasion-cart">
+                <a class="item_add" href="#">add to cart </a>
+            </div>
+            <div class="social">
+                <div class="social-left">
+                    <p>Share On :</p>
+                </div>
+                <div class="social-right">
+                    <ul class="social-icons">
+                        <li>
+                            <a href="#" class="facebook"></a>
+                        </li>
+                        <li>
+                            <a href="#" class="twitter"></a>
+                        </li>
+                        <li>
+                            <a href="#" class="g"></a>
+                        </li>
+                        <li>
+                            <a href="#" class="instagram"></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+</div>
+<!-- Single Modal -->
 
 
   

@@ -9,6 +9,17 @@ import { ProductProvider } from '../providers/product';
 export class HomeComponent {
   title = 'app';
   public products = [];
+  public productToView = {
+    Name: '',
+    Description: '',
+    Price: '',
+    IsOnSpecial: 'false',
+    Discount: '',
+    ImageName: '',
+    StoreId: 0,
+    CreatedDate: '',
+    Id: 0,
+  };
   public serverImgurl = "http://localhost:7777/";
   public currentUser: any;
   constructor(public productProvider: ProductProvider) {
@@ -17,4 +28,10 @@ export class HomeComponent {
       this.products = response;
     });
   }
+
+  setProductToView(product) {
+    this.productToView = product;
+    //sessionStorage.setItem('productToView', JSON.stringify(product));
+  }
 }
+

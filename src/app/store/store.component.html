@@ -156,11 +156,31 @@
                             <small class="red">The field above is required.</small>
                         </div>
                 </div>
+                <div class="row">
+                    <h5>Quality :</h5>
+                    <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
+								<option value="1">1 Qty</option>
+								<option value="2">2 Qty</option> 
+								<option value="3">3 Qty</option>	
+								<option value="4">4 Qty</option>				
+								<option value="5">5 Qty</option>		
+								<option value="6">6 Qty</option>
+								<option value="7">7 Qty</option>
+								<option value="8">8 Qty</option>
+								<option value="9">9 Qty</option>
+								<option value="10">10 Qty</option>	
+								<option value="11">11 Qty</option>
+								<option value="12">12 Qty</option>
+								<option value="13">13 Qty</option>
+								<option value="14">14 Qty</option>	
+								<option value="15">15 Qty</option>				
+							</select>
+                </div>
                 <div>
                     <div class="check">
                         <label class="checkbox"><input type="checkbox" formControlName="isOnSpecial" [checked]="product.isOnSpecial" (change)="product.isOnSpecial = !product.isOnSpecial" name="isOnSpecial"><i> </i>Is On Special</label>
                     </div>
-                </div>
+                </div>                
                 <div *ngIf="product.isOnSpecial">
                     <input type="number" style="background: none; background-color: white;padding-left: 15px;margin-bottom: 5px;outline: none; border: 1px solid #DBDBDB;padding: 10px 10px 10px 45px;font-size: 14px;color: #999;display: block;width: 100%;"
                         placeholder="Special Price" [value]="product.discount" formControlName="discount" (input)="product.discount = $event.target.value"
