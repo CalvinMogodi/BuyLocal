@@ -10,6 +10,7 @@ declare const $: any;
 })
 export class NavComponent implements OnInit {
   public showlogout: boolean = false;
+  public activeMenuTab: number = 0;
 
   constructor(public router: Router, public commonService: CommonService) {
     router.events.subscribe((url:any) => { 
@@ -18,7 +19,22 @@ export class NavComponent implements OnInit {
       this.showlogout = false;
     } else {
       this.showlogout = true;
-    }});
+    }
+    switch(url.url){
+      case "/" : {
+        this.activeMenuTab = 0;
+        break;
+      }
+      case "/store" :  {
+        this.activeMenuTab = 1;
+        break;
+      }
+      case "/product" :  {
+        this.activeMenuTab = 2;
+        break;
+      }
+    }
+  });
   }
 
   ngOnInit() {

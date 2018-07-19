@@ -62,7 +62,7 @@
                     <tbody>
                         <tr *ngFor='let product of products; let i = index' style="font-size: 12px;">
                             <td style="text-align: start;"><label>{{ product.Name }}</label></td>
-                            <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{product.Description}}">{{ product.Description }}</label></td>
+                            <td style="text-align: start;" class="text-overflow"><label data-toggle="tooltip" data-placement="top" title="{{product.Description}}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 230px;">{{ product.Description }}</label></td>
                             <td style="text-align: start;"><label>R {{ product.Price }}</label></td>
                             <td style="text-align: start;" *ngIf="product.IsOnSpecial == 1"><label>Yes</label></td>
                             <td style="text-align: start;" *ngIf="product.IsOnSpecial != 1"><label>No</label></td>
@@ -168,7 +168,7 @@
                         <div *ngIf="!productForm.controls.discount.valid && (productForm.controls.discount.dirty || submitAttempt)">
                             <small class="red">The field above is required.</small>
                         </div>
-                        <p *ngIf="product.discount >= product.price" style="color: red;font-size: small;text-align:start"> Special price must be less than normal price </p>
+                        <p *ngIf="showDiscountError" style="color: red;font-size: small;text-align:start"> Special price must be less than normal price </p>
                 </div>
                 <div class="row">
                     <div class="col-md-6">

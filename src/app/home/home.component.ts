@@ -9,6 +9,7 @@ import { ProductProvider } from '../providers/product';
 export class HomeComponent {
   title = 'app';
   public products = [];
+  public serverImgurl = "http://localhost:7777/";
   public currentUser: any;
   constructor(public productProvider: ProductProvider) {
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));

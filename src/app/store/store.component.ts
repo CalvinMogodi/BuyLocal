@@ -20,6 +20,7 @@ export class StoreComponent {
     Id: 0,
     index: -1
   };
+  public showDiscountError = false;
   public storeForm: FormGroup;
   public productForm: FormGroup;
   public submitStoreAttempt: boolean = false;
@@ -249,16 +250,20 @@ export class StoreComponent {
     this.submitProductAttempt = true;
     this.showProductError = false;
     this.productError = '';
+     this.showDiscountError = false;
     if (this.productForm.valid) {
       if (this.product.isOnSpecial) {
-        if (this.product.discount >= this.product.price)
+        if (Number(this.product.discount) >= Number(this.product.price))
+        {
+          this.showDiscountError = true;
           return false;
+        }          
       }
       this.storeProvider.productisDuplicate({ storeId: this.selectedStore.Id, name: this.product.name }).subscribe((response: any) => {
         if (!response.result) {
           this.storeProvider.uploadProductImage(this.base64Image).subscribe((response: any) => {
-            this.product.imageName = response;
-            this.product.createdDate = new Date().toString();
+            this.product.imageName = response;                    
+            this.product.createdDate = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
             this.product.storeId = this.selectedStore.Id;
             this.storeProvider.addProduct(this.product).subscribe((response: any) => {
               if (response.result && response.errorMessage == null) {
@@ -284,15 +289,19 @@ export class StoreComponent {
     this.submitProductAttempt = true;
     this.showProductError = false;
     this.productError = '';
+     this.showDiscountError = false;
     if (this.product.name != '' && this.product.description != '' && this.product.price != '') {
       if (this.product.isOnSpecial) {
-        if (this.product.discount >= this.product.price)
+        if (Number(this.product.discount) >= Number(this.product.price))
+        {
+          this.showDiscountError = true;
           return false;
+        }
       }
-      this.product.createdDate = new Date().toString();
+      this.product.createdDate = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
       if (this.serverImgurl == '') {
         this.storeProvider.uploadProductImage(this.base64Image).subscribe((response: any) => {
-          this.product.imageName = response;
+          this.product.imageName = response;                
           this.storeProvider.updateProduct(this.product).subscribe((response: any) => {
             if (response.result && response.errorMessage == null) {
               let element: HTMLElement = document.getElementById('closeProductModal') as HTMLElement;
